@@ -1,0 +1,22 @@
+name: Visualize
+
+on:
+    workflow_dispatch:
+    schedule:
+        - cron: "0 0 * * *"
+
+jobs:
+    vis:
+        name: Visualize
+        runs-on: ubuntu-latest
+        steps:
+            - uses: JacobLinCool/GitHub-User-Visualization@main
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  username: ${{ github.repository_owner }} # The username of the user you want to visualize
+
+            - uses: peaceiris/actions-gh-pages@v3
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN  }}
+                  publish_dir: "vis"
+                  publish_branch: "gh-pages"
